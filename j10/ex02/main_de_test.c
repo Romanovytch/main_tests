@@ -5,40 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgiverna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/11 12:31:02 by fgiverna          #+#    #+#             */
-/*   Updated: 2017/08/21 15:02:28 by fgiverna         ###   ########.fr       */
+/*   Created: 2017/08/16 14:26:53 by fgiverna          #+#    #+#             */
+/*   Updated: 2017/08/21 16:53:23 by fgiverna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-int	ft_ultimate_range(int **range, int min, int max);
+int		*ft_map(int *tab, int length, int(*f)(int));
+void	ft_putnbr(int);
 
-int	main(void)
+int	ft_add42(int nb)
 {
-	int	*range;
-	int max;
-	int min;
-	int	len;
+	return (nb + 42);
+}
+
+int	main()
+{
+	int	tab[] = {42, 1755, -125, 0, 81, 1024};
+	int	*ret;
 	int	i;
 
 	i = 0;
-	max = 4;
-	min = 0;
-	len = ft_ultimate_range(&range, min, max);
-	printf("Len returned : %d\n", len);
-	if (range == NULL)
-		printf("Min is > or = to Max ; Null should be returned : OK\n");
-	else
-		while (i < len)
-	   		printf("%d\n", range[i++]);
-	// free(tab);
-	printf("Trying max = min :");
-	if (ft_ultimate_range(&range, 10, 10) == 0)
-		printf("OK.\n");
-	printf("Trying max < min :");
-	if (ft_ultimate_range(&range, 10, 5) == 0)
-		printf("OK.\n");
+	ret = ft_map(tab, 6, &ft_add42);
+	while (i < 6)
+	{
+		printf("Ftmap returns %d, expected %d\n", ret[i], tab[i] + 42);
+		i++;
+	}
+	free(ret);
 	return (0);
 }

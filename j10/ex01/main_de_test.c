@@ -5,40 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgiverna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/11 12:31:02 by fgiverna          #+#    #+#             */
-/*   Updated: 2017/08/21 15:02:28 by fgiverna         ###   ########.fr       */
+/*   Created: 2017/08/16 14:26:53 by fgiverna          #+#    #+#             */
+/*   Updated: 2017/08/21 16:50:20 by fgiverna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-int	ft_ultimate_range(int **range, int min, int max);
+void	ft_foreach(int *tab, int length, void(*f)(int));
+void	ft_putnbr(int);
 
-int	main(void)
+void	ft_putchar(char c)
 {
-	int	*range;
-	int max;
-	int min;
-	int	len;
-	int	i;
+	write(1, &c, 1);
+}
 
-	i = 0;
-	max = 4;
-	min = 0;
-	len = ft_ultimate_range(&range, min, max);
-	printf("Len returned : %d\n", len);
-	if (range == NULL)
-		printf("Min is > or = to Max ; Null should be returned : OK\n");
-	else
-		while (i < len)
-	   		printf("%d\n", range[i++]);
-	// free(tab);
-	printf("Trying max = min :");
-	if (ft_ultimate_range(&range, 10, 10) == 0)
-		printf("OK.\n");
-	printf("Trying max < min :");
-	if (ft_ultimate_range(&range, 10, 5) == 0)
-		printf("OK.\n");
+int	main()
+{
+	int	tab[] = {42, 1755, -125, 0, 81, 1024};
+
+	printf("Testing empty tab :\n");
+	ft_foreach(tab, 0, NULL);
+	printf("Ok.\n");
+	printf("Testing tab = {42, 1755, -125, 0, 81, 1024} :\n");
+	ft_foreach(tab, 6, &ft_putnbr);
 	return (0);
 }
